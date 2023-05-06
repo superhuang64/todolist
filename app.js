@@ -5,8 +5,6 @@ const bodyParser = require("body-parser");
 //const date = require(__dirname + "/date.js");
 const mongoose = require("mongoose");
 const _ = require("lodash");
-const http = require("http");
-const client = require("@mailchimp/mailchimp_marketing");//get api root
 
 const app = express();
 
@@ -14,19 +12,6 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
-
-//setting up Mailchimp
-client.setConfig({
-  apiKey: "c1a95291de4c983f538bb055c4b3433b-us21",
-  server: "us21",
-});
-
-const run = async () => {
-  const response = await client.root.getRoot();
-  console.log(response);
-};
-
-run();
 
 //mongoose set up & add new items(default items) to the database
 main().catch((err) => console.log("err"));
